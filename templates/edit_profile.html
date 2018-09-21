@@ -1,0 +1,44 @@
+<html>
+<body>
+  <p><a href="http://localhost:5000/">Home</a> > <a href="http://localhost:5000/edit/">Edit Profile</a></p>
+  <h2>Profile</h2>
+  Signed in as {{name}} -> {{type}} Account
+  <form action="" method="POST">
+  <table>
+    <tr>
+      <td>EMAIL :</td><td>{{email}}</td>
+    </tr>
+    <tr>
+      <td>PHONE :</td><td><input type="tel" name="phone" value="{{phone}}"></td>
+    </tr>
+    {% if type=="Seller" %}
+    <tr>
+      <td>CATEGORY :</td><td>{{category}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td><b>ADDRESS :</b></td>
+    </tr>
+    <tr>
+      <td>LANDMARK/AREA :</td><td><input type="text" name="area" value="{{area}}"></td>
+    </tr>
+    <tr>
+      <td>LOCALITY :</td><td><input type="text" name="locality" value="{{locality}}"></td>
+    </tr>
+    <tr>
+      <td>CITY :</td><td><input type="text" name="city" value="{{city}}"></td>
+    </tr>
+    <tr>
+      <td>STATE :</td><td><input type="text" name="state" value="{{state}}"></td>
+    </tr>
+    <tr>
+      <td>COUNTRY :</td><td><input type="text" name="country" value="{{country}}"></td>
+    </tr>
+    <tr>
+      <td>ZIPCODE :</td><td><input type="text" name="zip" value="{{zip}}"></td>
+    </tr>
+  </table>
+  <input type="submit" name="Save Changes">
+</form>
+</body>
+</html>
