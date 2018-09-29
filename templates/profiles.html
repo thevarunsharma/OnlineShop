@@ -1,0 +1,31 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="/viewprofile/">View Profiles</a></p>
+  <p><a href="/viewprofile/{{id}}/">My Profile</a></p>
+  <p>OR</p>
+  <p>Search {{type}}:</p>
+  <form action="" method="POST">
+    <input type="search" name="search" value="" placeholder="Search by Name">
+    <input type="submit" value="Search">
+  </form>
+  {% if after_srch %}
+    {% if found %}
+    <table>
+      <th>
+        <td>SNo.</td><td>NAME</td><td>EMAIL</td><td>PHONE</td><td>ADDRESS</td><td>ZIPCODE</td>
+      </th>
+      {% set cnt={'val':1} %}
+      {% for items in results %}
+      <tr>
+        <td>{{cnt['val']}}</td><td><a href="/viewprofile/{{items[0]}}">{{items[1]}}</a></td>
+        <td>{{items[2]}}</td><td>{{items[3]}}</td><td>{{items[4]}}, {{items[5]}}, {{items[6]}}, {{items[7]}}, {{items[8]}}</td><td>{{items[9]}}</td>
+      </tr>
+      {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>No matching {{type}}s found</p>
+    {% endif %}
+  {% endif %}
+</body>
+</html>

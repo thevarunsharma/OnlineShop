@@ -1,0 +1,22 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="">Login</a></p>
+  <h2>Login</h2>
+  {% if err %}
+    Sorry! entered email and password do not match any records
+  {% endif %}
+  <form action="" method="POST" onsubmit="return validateForm()">
+    <input type="radio" value="Customer" name="type" checked>Customer <br/>
+    <input type="radio" value="Seller" name="type">Seller
+    <table>
+      <tr>
+        <td>EMAIL:</td><td><input type="text" name="email" id="email"></td>
+      </tr><tr>
+        <td>PASSWORD:</td><td><input type="password" name="password" id="pass"></td>
+      </tr>
+    </table>
+    <input type="submit" value="SUBMIT">
+  </form>
+  <script type="text/javascript" src="{{url_for('static', filename='login.js')}}"></script>
+</body>
+</html>
