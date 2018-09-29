@@ -210,7 +210,45 @@ def buy():
         return render_template('search_products.html', after_srch=True, results=results)
     return render_template('search_products.html', after_srch=False)
 
-#@app.route("/buy/<id>/")
+@app.route("/buy/<id>/", methods=['POST', 'GET'])
+def buy_product(id):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    ispresent, tup = get_product_info(id)
+    if not ispresent:
+        abort(404)
+    (name, quantity, category, cost_price, sell_price, sellID, desp, sell_name) = tup
+    if request.method=="POST":
+        data = request.form
+        total = int(data['qty'])*float(sell_price)
+        return redirect(url_for('buy_confirm', total=total, quantity=data['qty'], id=id))
+    return render_template('buy_product.html', name=name, category=category, desp=desp, quantity=quantity, price=sell_price)
+
+@app.route("/buy/<id>/confirm/", methods=["POST", "GET"])
+def buy_confirm(id):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    ispresent, tup = get_product_info(id)
+    if not ispresent:
+        abort(404)
+    (name, quantity, category, cost_price, sell_price, sellID, desp, sell_name) = tup
+    if 'total' not in request.args or 'quantity' not in request.args:
+        abort(404)
+    total = request.args['total']
+    qty = request.args['quantity']
+    if request.method=="POST":
+        choice = request.form['choice']
+        if choice=="PLACE ORDER":
+            place_order(id, session['userid'], qty)
+            return "DONE"
+        elif choice=="CANCEL":
+            return redirect(url_for('buy_product', id=id))
+
+    return render_template('buy_confirm.html', name=name, qty=qty, total=total)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.run(debug=True)
