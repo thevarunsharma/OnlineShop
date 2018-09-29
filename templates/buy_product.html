@@ -1,0 +1,23 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">{{name}}</a></p>
+  <h2>{{name}}</h2>
+  <form action="" method="POST">
+    <table>
+      <tr>
+        <td>CATEGORY :</td><td>{{category}}</td>
+      </tr>
+      <tr>
+        <td>DESCRIPTION :</td><td><pre>{{desp}}</pre></td>
+      </tr>
+      <tr>
+        <td>QUANTITY (select quantity):</td><td><input type="number" name="qty" value="1" min="1" max='{{quantity}}'></td>
+      </tr>
+      <tr>
+        <td>PRICE/UNIT (in ₹):</td><td>{{price}}</td>
+      </tr>
+    </table>
+    <input type="submit" value="PROCEED">
+  </form>
+</body>
+</html>

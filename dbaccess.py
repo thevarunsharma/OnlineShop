@@ -32,6 +32,16 @@ def gen_prodID():
     id = "PID"+"0"*(7-len(prodnum))+prodnum
     return id
 
+def gen_orderID():
+    conn = sqlite3.connect("onlineshop.db")
+    cur = conn.cursor()
+    cur.execute("UPDATE metadata SET ordernum = ordernum + 1")
+    conn.commit()
+    ordernum = str([i for i in cur.execute("SELECT ordernum FROM metadata")][0][0])
+    conn.close()
+    id = "OID"+"0"*(7-len(ordernum))+ ordernum
+    return id
+
 def add_user(data):
     conn = sqlite3.connect("onlineshop.db")
     cur = conn.cursor()
@@ -206,7 +216,9 @@ def search_myproduct(sellID, srchBy, category, keyword):
 def get_product_info(id):
     conn = sqlite3.connect('onlineshop.db')
     cur = conn.cursor()
-    a = cur.execute("SELECT p.name, p.quantity, p.category, p.cost_price, p.sell_price, p.sellID, p.description, s.name FROM product p JOIN seller s WHERE p.sellID=s.sellID AND p.prodID=? ", (id,))
+    a = cur.execute("""SELECT p.name, p.quantity, p.category, p.cost_price, p.sell_price,
+                    p.sellID, p.description, s.name FROM product p JOIN seller s
+                    WHERE p.sellID=s.sellID AND p.prodID=? """, (id,))
     res = [i for i in a]
     conn.close()
     if len(res)==0:
@@ -258,3 +270,13 @@ def search_products(srchBy, category, keyword):
         res = list(set(res))
     conn.close()
     return res
+
+def place_order(prodID, custID, qty):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    orderID = gen_orderID()
+    cur.execute("""INSERT INTO orders
+                    SELECT ?,?,?,?,datetime('now'), cost_price, sell_price, 'PLACED'
+                    FROM product WHERE prodID=? """, (orderID, custID, prodID, qty, prodID))
+    conn.commit()
+    conn.close()
