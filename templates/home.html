@@ -1,0 +1,26 @@
+<html>
+<body>
+  <ul>
+    <li><a href="/">Home</li>
+    <li><a href="/signup">Create New Account</a></li>
+    {% if signedin %}
+      <li><a href="/logout">Logout</a></li>
+    {% else %}
+      <li><a href="/login">Login</a></li>
+    {% endif %}
+  </ul>
+  {% if signedin %}
+    <p>Signed in as {{name}} -> {{type}} Account</p>
+    <p><a href="/viewprofile/">View Profiles</a></p>
+    <p><a href="/editprofile">Edit Profile</a></p>
+    {% if type=="Customer" %}
+      <p><a href="/buy">Buy Items</a></p>
+    {% elif type=="Seller" %}
+      <p><a href="/sell">Sell Items</a></p>
+    {% endif %}
+    <p><a href="/changepassword">Change Password</a></p>
+  {% else %}
+    <p>You are not currently signed in. Sign in to view Products/Profiles.</p>
+  {% endif %}
+</body>
+</html>

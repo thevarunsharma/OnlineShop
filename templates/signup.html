@@ -1,0 +1,57 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="">Create Account</a></p>
+  {% if not ok %}
+    <p>Sorry! Account with provided email already exists. Please enter another email</p>
+  {% endif %}
+  <form action="" method="POST">
+    <h2>Create New Account:</h2>
+    <table>
+    <tr>
+      <td>TYPE OF ACCOUNT: </td>
+      <td><ul style="list-style-type:none">
+        <li><input type="radio" value="Customer" name="type" checked>Customer</li>
+        <li><input type="radio" value="Seller" name="type">Seller</li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>NAME :</td><td><input type="text" name="name" required></td>
+    </tr>
+    <tr>
+      <td>EMAIL :</td><td><input type="text" name="email" required></td>
+    </tr>
+    <tr>
+      <td>PHONE :</td><td><input type="tel" name="phone" required></td>
+    </tr>
+    <tr>
+      <td><b>ADDRESS:</b></td>
+    </tr>
+    <tr>
+      <td>LANDMARK/AREA:</td><td><input type="text" name="area" required></td>
+    </tr>
+    <tr>
+      <td>LOCALITY :</td><td><input type="text" name="locality" required></td>
+    </tr>
+    <tr>
+      <td>CITY :</td><td><input type="text" name="city" required></td>
+    </tr>
+    <tr>
+      <td>STATE :</td><td><input type="text" name="state" required></td>
+    </tr>
+    <tr>
+      <td>COUNTRY :</td><td><input type="text" name="country" required></td>
+    </tr>
+    <tr>
+      <td>ZIPCODE :</td><td><input type="text" name="zip" required></td>
+    </tr>
+    <tr>
+      <td>ENTER PASSWORD :</td><td><input type="password" name="password" required></td>
+    </tr>
+    <tr>
+      <td>RE-ENTER PASSWORD :</td><td><input type="password" name="cnfrm_psswd" required></td>
+    </tr>
+    </table>
+    <p><input type="submit" value="SUBMIT"></p>
+  </form>
+</body>
+</html>

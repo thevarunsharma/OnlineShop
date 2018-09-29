@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <p><a href="/">Home</a> >
+        {% if type=="Seller" %}<a href="/sell/">Sell</a> >
+        {% else %}<a href="/buy/">Buy</a> > {% endif %}
+        <a href="/viewproduct">View Product</a> > <a href="">{{name}}</a></p>
+        <h2>Product Information</h2>
+        <table>
+            <tr>
+                <td>Name :</td><td>{{name}}</td>
+            </tr>
+            <tr>
+                <td>In Stock :</td><td>{{quantity}}</td>
+            </tr>
+            <tr>
+                <td>Category :</td><td>{{category}}</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                {% if type=="Seller" %}<td>{{cost_price}}</td>
+                {% else %}<td>{{sell_price}}</td>{% endif %}
+            </tr>
+            {% if type=="Customer" %}
+            <tr>
+                <td>Sold By :</td><td><a href="/viewprofile/{{sell_id}}" target="blank">{{sell_name}}</a></td>
+            </tr>{% endif %}
+        </table>
+        <p>About :<br><pre>{{desp}}</pre></p>
+        {% if type=="Seller" %}
+        <a href="/viewproduct/{{prod_id}}/edit">Edit Product</a>
+        {% else %}
+        <a href="/buy/{{prod_id}}">Buy Product</a>
+        {% endif %}
+    </body>
+</html>
