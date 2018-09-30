@@ -343,3 +343,57 @@ def sell_sales(sellID):
     res = [i for i in a]
     conn.close()
     return res
+
+def add_product_to_cart(prodID, custID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    cur.execute("""INSERT INTO cart VALUES (?,?,1) """, (custID, prodID))
+    conn.commit()
+    conn.close()
+
+def get_cart(custID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    a = cur.execute("""SELECT p.prodID, p.name, p.sell_price, c.sum_qty, p.quantity
+                       FROM (SELECT custID, prodID, SUM(quantity) AS sum_qty FROM cart
+                       GROUP BY custID, prodID) c JOIN product p
+                       WHERE p.prodID=c.prodID AND c.custID=?""", (custID,))
+    res = [i for i in a]
+    conn.close()
+    return res
+
+def update_cart(custID, qty):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    for prodID in qty:
+        cur.execute("DELETE FROM cart WHERE prodID=? AND custID=?", (prodID, custID))
+        cur.execute("INSERT INTO cart VALUES (?,?,?)", (custID, prodID, qty[prodID]))
+    conn.commit()
+    conn.close()
+
+def cart_purchase(custID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    cart = get_cart(custID)
+    for item in cart:
+        orderID = gen_orderID()
+        prodID = item[0]
+        qty = item[3]
+        cur.execute("""INSERT INTO orders
+                        SELECT ?,?,?,?,datetime('now'), cost_price*?, sell_price*?, 'PLACED'
+                        FROM product WHERE prodID=? """, (orderID, custID, prodID, qty, qty, qty, prodID))
+        cur.execute("DELETE FROM cart WHERE custID=? AND prodID=?", (custID, prodID))
+        conn.commit()
+    conn.close()
+
+def empty_cart(custID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    cur.execute("DELETE FROM cart WHERE custID=?", (custID,))
+    conn.commit()
+
+def remove_from_cart(custID, prodID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    cur.execute("DELETE FROM cart WHERE custID=? AND prodID=?", (custID, prodID))
+    conn.commit()

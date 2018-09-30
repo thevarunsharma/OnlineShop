@@ -247,8 +247,8 @@ def buy_confirm(id):
             return redirect(url_for('my_orders'))
         elif choice=="CANCEL":
             return redirect(url_for('buy_product', id=id))
-
-    return render_template('buy_confirm.html', name=name, qty=qty, total=total)
+    items = ((name, qty, total))
+    return render_template('buy_confirm.html', items=items, total=total)
 
 @app.route("/buy/myorders/")
 def my_orders():
@@ -342,6 +342,70 @@ def my_sales():
         abort(403)
     res = sell_sales(session['userid'])
     return render_template('my_sales.html', sales=res)
+
+@app.route("/buy/cart/", methods=["POST", "GET"])
+def my_cart():
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    cart = get_cart(session['userid'])
+    if request.method=="POST":
+        data = request.form
+        qty = {}
+        for i in data:
+            if i.startswith("qty"):
+                qty[i[3:]]=data[i]      #qty[prodID]=quantity
+        update_cart(session['userid'], qty)
+        return redirect("/buy/cart/confirm/")
+    return render_template('my_cart.html', cart=cart)
+
+@app.route("/buy/cart/confirm/", methods=["POST", "GET"])
+def cart_purchase_confirm():
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    if request.method=="POST":
+        choice = request.form['choice']
+        if choice=="PLACE ORDER":
+            cart_purchase(session['userid'])
+            return redirect(url_for('my_orders'))
+        elif choice=="CANCEL":
+            return redirect(url_for('my_cart'))
+    cart = get_cart(session['userid'])
+    items = [(i[1], i[3], float(i[2])*float(i[3])) for i in cart]
+    total = 0
+    for i in cart:
+        total += float(i[2])*int(i[3])
+    return render_template('buy_confirm.html', items=items, total=total)
+
+@app.route("/buy/cart/<prodID>/")
+def add_to_cart(prodID):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    add_product_to_cart(prodID, session['userid'])
+    return redirect(url_for('view_product', id=prodID))
+
+@app.route("/buy/cart/delete/")
+def delete_cart():
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['userid']=="Seller":
+        abort(403)
+    empty_cart(session['userid'])
+    return redirect(url_for('my_cart'))
+
+@app.route("/buy/cart/delete/<prodID>/")
+def delete_prod_cart(prodID):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['userid']=="Seller":
+        abort(403)
+    remove_from_cart(session['userid'], prodID)
+    return redirect(url_for('my_cart'))
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.run(debug=True)
