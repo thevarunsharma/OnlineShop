@@ -6,9 +6,9 @@
   <p>You haven't done any sales yet.</p>
   {% else %}
   <table>
-    <th>
-      <td>SNO.</td><td>PRODUCT</td><td>QUANTITY</td><td>AMOUNT</td><td>DATE-TIME</td><td>SOLD TO</td>
-    </th>
+    <tr>
+      <th>SNO.</th><th>PRODUCT</th><th>QUANTITY</th><th>AMOUNT</th><th>DATE-TIME</th><th>SOLD TO</th>
+    </tr>
     {% set cnt={'val':1} %}
     {% for i in sales %}
     <tr>

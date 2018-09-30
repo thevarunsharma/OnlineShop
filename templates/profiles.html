@@ -11,9 +11,9 @@
   {% if after_srch %}
     {% if found %}
     <table>
-      <th>
-        <td>SNo.</td><td>NAME</td><td>EMAIL</td><td>PHONE</td><td>ADDRESS</td><td>ZIPCODE</td>
-      </th>
+      <tr>
+        <th>SNo.</th><th>NAME</th><th>EMAIL</th><th>PHONE</th><th>ADDRESS</th><th>ZIPCODE</th>
+      </tr>
       {% set cnt={'val':1} %}
       {% for items in results %}
       <tr>

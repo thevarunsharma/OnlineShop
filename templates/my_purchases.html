@@ -6,9 +6,9 @@
   <p>You haven't done any purchases yet.</p>
   {% else %}
   <table>
-    <th>
-      <td>SNO.</td><td>PRODUCT</td><td>QUANTITY</td><td>AMOUNT</td><td>DATE-TIME</td>
-    </th>
+    <tr>
+      <th>SNO.</th><th>PRODUCT</th><th>QUANTITY</th><th>AMOUNT</th><th>DATE-TIME</th>
+    </tr>
     {% set cnt={'val':1} %}
     {% for i in purchases %}
     <tr>

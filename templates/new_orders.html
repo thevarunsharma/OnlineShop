@@ -6,10 +6,10 @@
   <p>You have new orders right now.</p>
   {% else %}
   <table>
-    <th>
-      <td>SNO.</td><td>PRODUCT</td><td>QTY. TO DELIVER</td>
-      <td>QTY. AVAILABLE</td><td>AMOUNT</td><td>DATE-TIME</td><td>STATUS</td><td></td>
-    </th>
+    <tr>
+      <th>SNO.</th><th>PRODUCT</th><th>QTY. TO DELIVER</th>
+      <th>QTY. AVAILABLE</th><th>AMOUNT</th><th>DATE-TIME</th><th>STATUS</th><th></th>
+    </tr>
     {% set cnt={'val':1} %}
     {% for i in orders %}
     <tr>
