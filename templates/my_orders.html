@@ -16,6 +16,8 @@
       <td>₹ {{i[4]}}</td><td>{{i[5]}}</td><td>{{i[6]}}</td>
       {% if i[6]=="PLACED" %}
       <td><a href="/cancel/{{i[0]}}">Cancel Order</a></td>
+      {% elif i[6]=="DISPACHED" %}
+      <td><a href="/recieve/{{i[0]}}">Recieved Order</a></td>
       {% endif %}
     </tr>
     {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
