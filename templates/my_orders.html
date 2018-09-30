@@ -1,0 +1,26 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">My Orders</a></p>
+  <h2>My Orders</h2>
+  {% if orders|length==0 %}
+  <p>You have no orders yet.</p>
+  {% else %}
+  <table>
+    <th>
+      <td>SNO.</td><td>PRODUCT</td><td>QUANTITY</td><td>AMOUNT</td><td>DATE-TIME</td><td>STATUS</td><td></td>
+    </th>
+    {% set cnt={'val':1} %}
+    {% for i in orders %}
+    <tr>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{i[1]}}">{{i[2]}}</a></td><td>{{i[3]}}</td>
+      <td>₹ {{i[4]}}</td><td>{{i[5]}}</td><td>{{i[6]}}</td>
+      {% if i[6]=="PLACED" %}
+      <td><a href="/cancel/{{i[0]}}">Cancel Order</a></td>
+      {% endif %}
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>
