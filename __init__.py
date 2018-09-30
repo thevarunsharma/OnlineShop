@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect, abort
 from dbaccess import *
+import sys
 
+port = int(sys.argv[1])
 app = Flask(__name__)
 
 session={}
@@ -247,7 +249,7 @@ def buy_confirm(id):
             return redirect(url_for('my_orders'))
         elif choice=="CANCEL":
             return redirect(url_for('buy_product', id=id))
-    items = ((name, qty, total))
+    items = ((name, qty, total),)
     return render_template('buy_confirm.html', items=items, total=total)
 
 @app.route("/buy/myorders/")
@@ -408,4 +410,4 @@ def delete_prod_cart(prodID):
     return redirect(url_for('my_cart'))
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.run(debug=True)
+app.run(port=port, debug=True)
