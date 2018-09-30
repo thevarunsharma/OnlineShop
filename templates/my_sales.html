@@ -1,0 +1,23 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="/sell">Sell</a> > <a href="">My Sales</a></p>
+  <h2>My Sales</h2>
+  {% if sales|length==0 %}
+  <p>You haven't done any sales yet.</p>
+  {% else %}
+  <table>
+    <th>
+      <td>SNO.</td><td>PRODUCT</td><td>QUANTITY</td><td>AMOUNT</td><td>DATE-TIME</td><td>SOLD TO</td>
+    </th>
+    {% set cnt={'val':1} %}
+    {% for i in sales %}
+    <tr>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{i[0]}}">{{i[1]}}</a></td><td>{{i[2]}}</td>
+      <td>₹ {{i[3]}}</td><td>{{i[4]}}</td><td><a href="/viewprofile/{{i[5]}}">{{i[6]}}</a></td>
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<body>
+  <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">My Purchases</a></p>
+  <h2>My Purchases</h2>
+  {% if purchases|length==0 %}
+  <p>You haven't done any purchases yet.</p>
+  {% else %}
+  <table>
+    <th>
+      <td>SNO.</td><td>PRODUCT</td><td>QUANTITY</td><td>AMOUNT</td><td>DATE-TIME</td>
+    </th>
+    {% set cnt={'val':1} %}
+    {% for i in purchases %}
+    <tr>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{i[0]}}">{{i[1]}}</a></td><td>{{i[2]}}</td>
+      <td>₹ {{i[3]}}</td><td>{{i[4]}}</td>
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>
