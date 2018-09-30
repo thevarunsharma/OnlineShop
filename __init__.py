@@ -250,5 +250,32 @@ def buy_confirm(id):
 
     return render_template('buy_confirm.html', name=name, qty=qty, total=total)
 
+@app.route("/buy/myorders/")
+def my_orders():
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session['type']=="Seller":
+        abort(403)
+    res = cust_orders(session['userid'])
+    return render_template('my_orders.html', orders=res)
+
+@app.route("/cancel/<orderID>/")
+def cancel_order(orderID):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    res = get_order_details(orderID)
+    if len(res)==0:
+        abort(404)
+    custID = res[0][0]
+    sellID = res[0][1]
+    if session['type']=="Seller" and sellID!=session['userid']:
+        abort(403)
+    if session['type']=="Customer" and custID!=session['userid']:
+        abort(403)
+    change_order_status(orderID, "CANCELLED")
+    return redirect(url_for('my_orders'))
+
+
+
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.run(debug=True)

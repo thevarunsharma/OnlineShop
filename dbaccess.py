@@ -276,7 +276,32 @@ def place_order(prodID, custID, qty):
     cur = conn.cursor()
     orderID = gen_orderID()
     cur.execute("""INSERT INTO orders
-                    SELECT ?,?,?,?,datetime('now'), cost_price, sell_price, 'PLACED'
-                    FROM product WHERE prodID=? """, (orderID, custID, prodID, qty, prodID))
+                    SELECT ?,?,?,?,datetime('now'), cost_price*?, sell_price*?, 'PLACED'
+                    FROM product WHERE prodID=? """, (orderID, custID, prodID, qty, qty, qty, prodID))
     conn.commit()
     conn.close()
+
+def cust_orders(custID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    a = cur.execute("""SELECT o.orderID, o.prodID, p.name, o.quantity, o.sell_price, o.date, o.status
+                       FROM orders o JOIN product p WHERE o.prodID=p.prodID ORDER BY o.date DESC """)
+    res = [i for i in a]
+    conn.close()
+    return res
+
+def get_order_details(orderID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    a = cur.execute(""" SELECT o.custID, p.sellID FROM orders o JOIN product p
+                        WHERE o.orderID=? AND o.prodID=p.prodID """, (orderID,))
+    res = [i for i in a]
+    conn.close()
+    return res
+
+def change_order_status(orderID, new_status):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    cur.execute("UPDATE orders SET status=? WHERE orderID=? ", (new_status, orderID))
+    conn.commit()
+    conn.close() 
