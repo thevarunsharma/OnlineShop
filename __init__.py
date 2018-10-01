@@ -83,6 +83,20 @@ def profile():
 
     return render_template('profiles.html', id=session['userid'], type=type, after_srch=False)
 
+@app.route("/viewprofile/<id>/sellerproducts/")
+def seller_products(id):
+    if 'userid' not in session:
+        return redirect(url_for('home'))
+    if session["type"]=="Seller":
+        abort(403)
+    det, categories = fetch_details(id, "Seller")   #details
+    if len(det)==0:
+        abort(404)
+    det = det[0]
+    name=det[1]
+    res = get_seller_products(id)
+    return render_template('seller_products.html', name=name, id=id, results=res)
+
 @app.route("/editprofile/", methods=["POST", "GET"])
 def edit_profile():
     if 'userid' not in session:

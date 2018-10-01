@@ -31,5 +31,8 @@
   {% if my %}
   <p><a href="/editprofile/">Edit Profile</a></p>
   {% endif %}
+  {% if not my and type!="Customer" %}
+  <p><a href="./sellerproducts">View Products by this Seller</a></p>
+  {% endif %}
 </body>
 </html>

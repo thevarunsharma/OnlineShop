@@ -270,6 +270,14 @@ def search_products(srchBy, category, keyword):
     conn.close()
     return res
 
+def get_seller_products(sellID):
+    conn = sqlite3.connect('onlineshop.db')
+    cur = conn.cursor()
+    a = cur.execute("SELECT prodID, name, category, sell_price FROM product WHERE sellID=? AND quantity!=0", (sellID,))
+    res = [i for i in a]
+    conn.close()
+    return res
+
 def place_order(prodID, custID, qty):
     conn = sqlite3.connect('onlineshop.db')
     cur = conn.cursor()
