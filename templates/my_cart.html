@@ -1,0 +1,37 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+<body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">My Cart</a></p>
+  </div>
+  <h2>My Cart</h2>
+  {% if cart|length==0 %}
+  <p>Your Cart is empty right now. <a href="/buy">Click here to Shop for products</a></p>
+  {% else %}
+  <form action="" method="POST">
+    <table>
+      <tr>
+        <th>SNO.</th><th>PRODUCT</th><th>PRICE (PER UNIT)</th><th>QUANTITY</th><th></th>
+      </tr>
+    {% set cnt={'val':1} %}
+    {% for item in cart %}
+    <tr>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{item[0]}}">{{item[1]}}</a></td><td>{{item[2]}}</td>
+      <td><input name="qty{{item[0]}}" type="number" value="{{item[3]}}" min="1" max="{{item[4]}}" required></td>
+      <td><p class="press"><a href="/buy/cart/delete/{{item[0]}}">REMOVE FROM CART</p></td>
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  <p class="press"><a href="/buy/cart/delete">EMPTY CART</a></p>
+  <input type="submit" value="PROCEED TO ORDER" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
+  {% endif %}
+  </form>
+</body>
+</html>

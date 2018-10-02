@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+      </head>
+<body>
+    <div class="sticky">
+        <h1>OnLineShop</h1>
+    </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/viewprofile/">View Profiles</a> > <a href="">User Profile</a></p>
+  </div>
+  <h2>User Profile</h2>
+  {{type}} Account
+  <table>
+    <tr>
+      <td>NAME :</td><td>{{name}}</td>
+    </tr>
+    <tr>
+      <td>EMAIL :</td><td>{{email}}</td>
+    </tr>
+    <tr>
+      <td>PHONE :</td><td>{{phone}}</td>
+    </tr>
+    {% if type=="Seller" %}
+    <tr>
+      <td>DEALS IN :</td>
+      <td>{% for i in category %}
+        {{i}},
+      {% endfor %}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>ADDRESS :</td><td>{{area}}, {{locality}}, {{city}}, {{state}}, {{country}}</td>
+    </tr>
+    <tr>
+      <td>ZIPCODE :</td><td>{{zip}}</td>
+    </tr>
+  </table>
+  {% if my %}
+  <p class="press"><a href="/editprofile/">Edit Profile</a></p>
+  {% endif %}
+  {% if not my and type!="Customer" %}
+  <p class="press"><a href="./sellerproducts">View Products by this Seller</a></p>
+  {% endif %}
+</body>
+</html>
