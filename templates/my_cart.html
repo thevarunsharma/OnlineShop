@@ -22,7 +22,7 @@
     {% set cnt={'val':1} %}
     {% for item in cart %}
     <tr>
-      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{item[0]}}">{{item[1]}}</a></td><td>{{item[2]}}</td>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{item[0]}}">{{item[1]}}</a></td><td>₹ {{item[2]}}</td>
       <td><input name="qty{{item[0]}}" type="number" value="{{item[3]}}" min="1" max="{{item[4]}}" required></td>
       <td><p class="press"><a href="/buy/cart/delete/{{item[0]}}">REMOVE FROM CART</p></td>
     </tr>

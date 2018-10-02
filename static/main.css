@@ -18,6 +18,8 @@ body{
     font-size: 1.5vw;
     background-image: url('background2.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: wheat;
     max-width: 100%;
     overflow-x: hidden;
@@ -73,7 +75,7 @@ div.nav a{
   background-color: rgba(3, 22, 32, 0.308);
   border-radius: 0.5vw;
   padding: 1vw;
-  width: 15vw;
+  width: 13vw;
   display: block;
   margin: auto;
   text-decoration: none;
