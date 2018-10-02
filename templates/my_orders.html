@@ -24,9 +24,9 @@
       <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{i[1]}}">{{i[2]}}</a></td><td>{{i[3]}}</td>
       <td>₹ {{i[4]}}</td><td>{{i[5]}}</td><td>{{i[6]}}</td>
       {% if i[6]=="PLACED" %}
-      <td><a href="/cancel/{{i[0]}}">Cancel Order</a></td>
+      <td><p class="press"><a href="/cancel/{{i[0]}}">Cancel Order</a></p></td>
       {% elif i[6]=="DISPACHED" %}
-      <td><a href="/recieve/{{i[0]}}">Recieved Order</a></td>
+      <td><p class="press"><a href="/recieve/{{i[0]}}">Recieved Order</a></p></td>
       {% else %}
       <td></td>
       {% endif %}
