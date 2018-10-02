@@ -1,0 +1,39 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+<body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+  <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">My Orders</a></p>
+  </div>
+  <h2>My Orders</h2>
+  {% if orders|length==0 %}
+  <p>You have no orders yet.</p>
+  {% else %}
+  <table>
+    <tr>
+      <th>SNO.</th><th>PRODUCT</th><th>QUANTITY</th><th>AMOUNT</th><th>DATE-TIME</th><th>STATUS</th><th></th>
+    </tr>
+    {% set cnt={'val':1} %}
+    {% for i in orders %}
+    <tr>
+      <td>{{cnt['val']}}</td><td><a href="/viewproduct/{{i[1]}}">{{i[2]}}</a></td><td>{{i[3]}}</td>
+      <td>₹ {{i[4]}}</td><td>{{i[5]}}</td><td>{{i[6]}}</td>
+      {% if i[6]=="PLACED" %}
+      <td><a href="/cancel/{{i[0]}}">Cancel Order</a></td>
+      {% elif i[6]=="DISPACHED" %}
+      <td><a href="/recieve/{{i[0]}}">Recieved Order</a></td>
+      {% else %}
+      <td></td>
+      {% endif %}
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>

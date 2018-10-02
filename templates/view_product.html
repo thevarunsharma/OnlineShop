@@ -1,0 +1,49 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+    <body>
+      <div class="sticky">
+        <h1>OnLineShop</h1>
+      </div>
+      <div class="nav">
+        <p><a href="/">Home</a> >
+        {% if type=="Seller" %}<a href="/sell/">Sell</a> >
+        {% else %}<a href="/buy/">Buy</a> > {% endif %}
+        <a href="/viewproduct">View Product</a> > <a href="">{{name}}</a></p>
+      </div>
+        <h2>Product Information</h2>
+        <table>
+            <tr>
+                <td>Name :</td><td>{{name}}</td>
+            </tr>
+            <tr>
+                <td>In Stock :</td><td>{{quantity}}</td>
+            </tr>
+            <tr>
+                <td>Category :</td><td>{{category}}</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                {% if type=="Seller" %}<td>{{cost_price}}</td>
+                {% else %}<td>{{sell_price}}</td>{% endif %}
+            </tr>
+            {% if type=="Customer" %}
+            <tr>
+                <td>Sold By :</td><td><a href="/viewprofile/{{sell_id}}" target="blank">{{sell_name}}</a></td>
+            </tr>{% endif %}
+            <tr>
+              <td>About :</td><td><pre>{{desp}}</pre></td>
+            </tr>
+        </table>
+        <div class="centerthis">
+        {% if type=="Seller" %}
+        <p class="press"><a href="/viewproduct/{{prod_id}}/edit">Edit Product</a></p>
+        {% else %}
+        <p class="press"><a href="/buy/{{prod_id}}">Buy Product</a></p>
+        <p class="press"><a href="/buy/cart/{{prod_id}}">Add to Cart</a></p>
+        {% endif %}
+        </div>
+    </body>
+</html>

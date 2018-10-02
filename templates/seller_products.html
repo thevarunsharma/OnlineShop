@@ -1,0 +1,33 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+<body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+  <p><a href="/">Home</a> > <a href="/viewprofile">View Profiles</a> > <a href="/viewprofile/{{id}}">{{name}}</a> > <a href="">Products</a></p>
+  </div>
+  <h2>Products by {{name}}</h2>
+  {% if results|length==0 %}
+  <p>This Seller doesn't have any Products yet.</p>
+  {% else %}
+  <table>
+    <tr>
+      <th>SNo.</th><th>Name</th>
+      <th>Category</th><th>Price(in ₹)</th><th></th>
+    </tr>
+    {% set cnt={'val':1} %}
+    {% for i in results %}
+    <tr>
+      <td>{{cnt['val']}}</td> <td>{{i[1]}}</td>  <td>{{i[2]}}</td>    <td>{{i[3]}}</td>
+     <td><a href="/viewproduct/{{i[0]}}" target="blank">View</a></td>
+    </tr>
+    {% if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+<body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">Confirm</a></p>
+  </div>
+  <h2>Confirm Order Placement</h2>
+  <form action="" method="POST">
+    <table>
+      <tr>
+        <th>SNo.</th><th>NAME</th><th>QUANTITY</th><th>AMOUNT (in ₹)</th>
+      </tr>
+    {% set cnt={'val':1} %}
+    {% for item in items %}
+    <tr>
+      <td>{{cnt['val']}}</td>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+    </tr>
+    {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
+    {% endfor %}
+    </table>
+    <table>
+      <tr><th>TOTAL AMOUNT :</th><th>{{total}}</th></tr>
+    </table>
+    <input type="submit" name="choice" value="PLACE ORDER" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
+    <input type="submit" name="choice" value="CANCEL" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
+  </form>
+</body>
+</html>

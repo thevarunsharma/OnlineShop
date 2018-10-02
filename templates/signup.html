@@ -1,0 +1,65 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
+<body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="">Create Account</a></p>
+  </div>
+  {% if not ok %}
+    <p>Sorry! Account with provided email already exists. Please enter another email</p>
+  {% endif %}
+  <form action="" method="POST">
+    <h2>Create New Account:</h2>
+    <table>
+    <tr>
+      <td>TYPE OF ACCOUNT: </td>
+      <td>
+        <input type="radio" value="Customer" name="type" checked>Customer &nbsp &nbsp <input type="radio" value="Seller" name="type">Seller
+      </td>
+    </tr>
+    <tr>
+      <td>NAME :</td><td><input type="text" name="name" required></td>
+    </tr>
+    <tr>
+      <td>EMAIL :</td><td><input type="email" name="email" required></td>
+    </tr>
+    <tr>
+      <td>PHONE :</td><td><input type="tel" name="phone" required></td>
+    </tr>
+    <tr>
+      <td><b>ADDRESS:</b></td>
+    </tr>
+    <tr>
+      <td>LANDMARK/AREA:</td><td><input type="text" name="area" required></td>
+    </tr>
+    <tr>
+      <td>LOCALITY :</td><td><input type="text" name="locality" required></td>
+    </tr>
+    <tr>
+      <td>CITY :</td><td><input type="text" name="city" required></td>
+    </tr>
+    <tr>
+      <td>STATE :</td><td><input type="text" name="state" required></td>
+    </tr>
+    <tr>
+      <td>COUNTRY :</td><td><input type="text" name="country" required></td>
+    </tr>
+    <tr>
+      <td>ZIPCODE :</td><td><input type="text" name="zip" required></td>
+    </tr>
+    <tr>
+      <td>ENTER PASSWORD :</td><td><input type="password" name="password" required></td>
+    </tr>
+    <tr>
+      <td>RE-ENTER PASSWORD :</td><td><input type="password" name="cnfrm_psswd" required></td>
+    </tr>
+    </table>
+    <p><input type="submit" value="SUBMIT" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;"></p>
+  </form>
+</body>
+</html>
