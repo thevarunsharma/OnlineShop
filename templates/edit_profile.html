@@ -1,6 +1,15 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="">Edit Profile</a></p>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="">Edit Profile</a></p>
+  </div>
   <h2>Edit Profile</h2>
   Signed in as {{name}} -> {{type}} Account
   <form action="" method="POST" onsubmit="return validateForm()">
@@ -33,7 +42,7 @@
       <td>ZIPCODE :</td><td><input type="text" name="zip" value="{{zip}}" id="zip"></td>
     </tr>
   </table>
-  <input type="submit" name="Save Changes">
+  <input type="submit" value="Save Changes" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
 </form>
 <script type="text/javascript" src="{{url_for('static', filename='edit_profile.js')}}?newversion"></script>
 </body>

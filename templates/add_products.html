@@ -1,14 +1,23 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="/sell/">Sell</a> > <a href="">Add New Products</a></p>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/sell/">Sell</a> > <a href="">Add New Products</a></p>
+  </div>
   <h2>Add Product:</h2>
   <form action="" method="POST">
     <table>
       <tr>
-        <td>NAME: </td><td><input type="text" name="name"></td>
+        <td>NAME: </td><td><input type="text" name="name" required></td>
       </tr>
       <tr>
-        <td>QUANTITY: </td><td><input type="number" name="qty" min="0"></td>
+        <td>QUANTITY: </td><td><input type="number" name="qty" min="0" required></td>
       </tr>
       <tr>
         <td>CATEGORY: </td>
@@ -25,13 +34,13 @@
         </select></td>
       </tr>
       <tr>
-        <td>PRICE(in ₹): </td><td><input type="number" name="price" min="0"></td>
+        <td>PRICE(in ₹): </td><td><input type="number" name="price" min="0" required></td>
       </tr>
       <tr>
         <td>DESCRIPTION: </td><td><textarea name="desp"></textarea></td>
       </tr>
     </table>
-    <input type="submit" value="Add Product">
+    <input type="submit" value="Add Product" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
   </form>
 </body>
 </html>

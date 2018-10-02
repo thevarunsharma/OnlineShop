@@ -1,12 +1,22 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="">Buy</a><p>
-  <ul>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="">Buy</a><p>
+  </div>
+  <ul class="headbar">
     <li><a href="">Search Products</a></li>
     <li><a href="./myorders">My Orders</a></li>
     <li><a href="./cart">My Cart</a></li>
     <li><a href="./purchases">My Purchases</a></li>
   </ul>
+  <div class="centerthis">
   <form action="" method="POST">
     <h3><input type="radio" value="by keyword" name="search method" checked>Search by keyword</h3>
     <input type="search" name="keyword" value="">
@@ -27,7 +37,8 @@
    <h3><input type="radio" value="both" name="search method">Both</h3>
    <br>
    <p><input type="submit" value="SEARCH"></p>
- </form>
+  </form>
+  </div>
  <br><br>
  {% if after_srch %}
   {% if results|length==0 %}
