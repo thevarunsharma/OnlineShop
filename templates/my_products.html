@@ -29,9 +29,9 @@
     <p>No results match your search</p>
   {% else %}
  <table>
-   <th>
-     <td>SNo.</td><td>Name</td><td>Quantity</td><td>Category</td><td>Price(in ₹)</td><td></td>
-   </th>
+   <tr>
+     <th>SNo.</th><th>Name</th><th>Quantity</th><th>Category</th><th>Price(in ₹)</th><th></th>
+   </tr>
    {% set cnt={'val':1} %}
    {% for i in results %}
    <tr>
