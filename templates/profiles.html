@@ -1,13 +1,25 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}?newversion31">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <!--link rel="stylesheet" href="../static/main.css"-->
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="/viewprofile/">View Profiles</a></p>
-  <p><a href="/viewprofile/{{id}}/">My Profile</a></p>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/viewprofile/">View Profiles</a></p>
+  </div>
+  <div class="centerthis">
+  <p class="press"><a href="/viewprofile/{{id}}/">My Profile</a></p>
   <p>OR</p>
   <p>Search {{type}}:</p>
   <form action="" method="POST">
     <input type="search" name="search" value="" placeholder="Search by Name">
     <input type="submit" value="Search">
   </form>
+  </div>
   {% if after_srch %}
     {% if found %}
     <table>
