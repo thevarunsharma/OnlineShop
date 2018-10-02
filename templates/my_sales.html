@@ -1,6 +1,15 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="/sell">Sell</a> > <a href="">My Sales</a></p>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="/sell">Sell</a> > <a href="">My Sales</a></p>
+  </div>
   <h2>My Sales</h2>
   {% if sales|length==0 %}
   <p>You haven't done any sales yet.</p>

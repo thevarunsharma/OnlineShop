@@ -1,9 +1,18 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
     <body>
+      <div class="sticky">
+        <h1>OnLineShop</h1>
+      </div>
+      <div class="nav">
         <p><a href="/">Home</a> >
         {% if type=="Seller" %}<a href="/sell/">Sell</a> >
         {% else %}<a href="/buy/">Buy</a> > {% endif %}
         <a href="/viewproduct">View Product</a> > <a href="">{{name}}</a></p>
+      </div>
         <h2>Product Information</h2>
         <table>
             <tr>
@@ -24,13 +33,17 @@
             <tr>
                 <td>Sold By :</td><td><a href="/viewprofile/{{sell_id}}" target="blank">{{sell_name}}</a></td>
             </tr>{% endif %}
+            <tr>
+              <td>About :</td><td><pre>{{desp}}</pre></td>
+            </tr>
         </table>
-        <p>About :<br><pre>{{desp}}</pre></p>
+        <div class="centerthis">
         {% if type=="Seller" %}
-        <a href="/viewproduct/{{prod_id}}/edit">Edit Product</a>
+        <p class="press"><a href="/viewproduct/{{prod_id}}/edit">Edit Product</a></p>
         {% else %}
-        <a href="/buy/{{prod_id}}">Buy Product</a>
-        <a href="/buy/cart/{{prod_id}}">Add to Cart</a>
+        <p class="press"><a href="/buy/{{prod_id}}">Buy Product</a></p>
+        <p class="press"><a href="/buy/cart/{{prod_id}}">Add to Cart</a></p>
         {% endif %}
+        </div>
     </body>
 </html>

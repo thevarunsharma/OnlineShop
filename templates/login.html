@@ -1,13 +1,21 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
-  <p><a href="/">Home</a> > <a href="">Login</a></p>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
+    <p><a href="/">Home</a> > <a href="">Login</a></p>
+  </div>
   <h2>Login</h2>
   {% if err %}
-    Sorry! entered email and password do not match any records
+    <p>Sorry! entered email and password do not match any records</p>
   {% endif %}
   <form action="" method="POST" onsubmit="return validateForm()">
-    <input type="radio" value="Customer" name="type" checked>Customer <br/>
-    <input type="radio" value="Seller" name="type">Seller
+    <input type="radio" value="Customer" name="type" checked>Customer &nbsp &nbsp<input type="radio" value="Seller" name="type">Seller
     <table>
       <tr>
         <td>EMAIL:</td><td><input type="email" name="email" id="email"></td>

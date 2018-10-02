@@ -1,6 +1,15 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
   <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">My Orders</a></p>
+  </div>
   <h2>My Orders</h2>
   {% if orders|length==0 %}
   <p>You have no orders yet.</p>
@@ -18,6 +27,8 @@
       <td><a href="/cancel/{{i[0]}}">Cancel Order</a></td>
       {% elif i[6]=="DISPACHED" %}
       <td><a href="/recieve/{{i[0]}}">Recieved Order</a></td>
+      {% else %}
+      <td></td>
       {% endif %}
     </tr>
     {%if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}

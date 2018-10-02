@@ -1,6 +1,15 @@
 <html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+</head>
 <body>
+  <div class="sticky">
+    <h1>OnLineShop</h1>
+  </div>
+  <div class="nav">
   <p><a href="/">Home</a> > <a href="/buy">Buy</a> > <a href="">{{name}}</a></p>
+  </div>
   <h2>{{name}}</h2>
   <form action="" method="POST">
     <table>
@@ -17,7 +26,7 @@
         <td>PRICE/UNIT (in ₹):</td><td>{{price}}</td>
       </tr>
     </table>
-    <input type="submit" value="PROCEED">
+    <input type="submit" value="PROCEED" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;">
   </form>
 </body>
 </html>
