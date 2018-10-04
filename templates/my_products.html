@@ -42,12 +42,12 @@
   {% else %}
  <table>
    <tr>
-     <th>SNo.</th><th>Name</th><th>Quantity</th><th>Category</th><th>Price(in ₹)</th><th></th>
+     <th>SNo.</th><th>Name</th><th>Quantity</th><th>Category</th><th>Price</th><th></th>
    </tr>
    {% set cnt={'val':1} %}
    {% for i in results %}
    <tr>
-     <td>{{cnt['val']}}</td> <td>{{i[1]}}</td>  <td>{{i[2]}}</td>    <td>{{i[3]}}</td>  <td>{{i[4]}}</td>  <td><a href="/viewproduct/{{i[0]}}">View</a></td>
+     <td>{{cnt['val']}}</td> <td>{{i[1]}}</td>  <td>{{i[2]}}</td>    <td>{{i[3]}}</td>  <td>₹ {{i[4]}}</td>  <td><a href="/viewproduct/{{i[0]}}">View</a></td>
    </tr>
    {% if cnt.update({'val':(cnt['val']+1)}) %}{% endif %}
    {% endfor %}

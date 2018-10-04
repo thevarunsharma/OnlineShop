@@ -20,7 +20,7 @@ def signup():
         ok = add_user(data)
         if ok:
             return render_template("success_signup.html")
-        return render_template("signup_customer.html", ok=ok)
+        return render_template("signup.html", ok=ok)
     return render_template("signup.html", ok=True)
 
 @app.route("/login/", methods=["POST", "GET"])

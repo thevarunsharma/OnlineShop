@@ -14,7 +14,7 @@
   {% if not ok %}
     <p>Sorry! Account with provided email already exists. Please enter another email</p>
   {% endif %}
-  <form action="" method="POST">
+  <form action="" method="POST" onsubmit="return checkEqual()">
     <h2>Create New Account:</h2>
     <table>
     <tr>
@@ -61,6 +61,7 @@
     </tr>
     </table>
     <p><input type="submit" value="SUBMIT" style="display:block; margin-left:auto; margin-right:auto; margin-top:1vw;"></p>
+    <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
   </form>
 </body>
 </html>
