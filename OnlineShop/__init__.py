@@ -113,6 +113,7 @@ def edit_profile():
         det, _ = fetch_details(userid, type)
         det = det[0]
         return render_template("edit_profile.html",
+                                type=type,
                                 name=det[1],
                                 email=det[2],
                                 phone=det[3],
@@ -429,4 +430,4 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 sess.init_app(app)
 if __name__=="__main__":
-	app.run(debug=True)
+	app.run(hostname='192.168.43.163')
