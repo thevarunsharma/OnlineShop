@@ -1,1 +1,1 @@
-gunicorn OnlineShop:app
+web: gunicorn OnlineShop:app
