@@ -1,0 +1,1 @@
+gunicorn OnlineShop:app
